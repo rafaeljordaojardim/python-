@@ -1,0 +1,9 @@
+# strings ->
+# numbers ->
+# booleans ->
+# lists ->
+# frozensets ->
+# tuples ->
+# ranges ->
+# dictionaries ->
+# None -> 
