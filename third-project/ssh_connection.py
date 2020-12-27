@@ -99,8 +99,20 @@ def ssh_connection(ip):
             print("\n DONE for device {} :)\n".format(ip))
 
         # test for reading command output
-        print(str(router_output)+"\n")
+        # print(str(router_output)+"\n")
 
+        # searching for the CPU utilization value within the output of  "show processes top once"
+        cpu = re.search(b"%Cpu\(s\):(\s)+(.+?)(\s)+us,", router_output)
+
+        # extracting the second group, witch matches the actual value of the CPU
+        # utilization and decoding the bytes object to produce a string (encoded to the popular UTF-8 format)
+        utilization = cpu.group(2).decode("utf-8")
+
+        # printing the cpu utilization value to the screen
+
+        # opening the cpu utilization text file and appending the results
+        with open("/home/rjardim/courses/python/third-project/output.txt", "a") as f:
+            f.write(utilization + "\n")
         #closing the connection
         session.close()
     except paramiko.AuthenticationException:
